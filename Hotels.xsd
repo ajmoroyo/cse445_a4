@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  XML Schema for validating Hotels.xml.
+  Rating is an optional attribute of Hotel.
+  NearestAirport is a required attribute of Address.
+  Schema uses the xsd: prefix and default namespace http://example.com/hotels.
+-->
+<xsd:schema 
+
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns="http://example.com/hotels"
+targetNamespace="http://example.com/hotels"
+elementFormDefault="qualified"
+attributeFormDefault="unqualified">
+
+  <!-- Root element declaration -->
+  <xsd:element name="Hotels" type="HotelsType"/>
+
+  <!-- Hotels contains multiple Hotel entries -->
+  <xsd:complexType name="HotelsType">
+    <xsd:sequence>
+      <xsd:element name="Hotel" type="HotelType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- Definition for a single Hotel entry -->
+  <xsd:complexType name="HotelType">
+    <xsd:sequence>
+      <xsd:element name="Name" type="xsd:string"/>
+      <xsd:element name="Phone" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+      <xsd:element name="Address" type="AddressType"/>
+    </xsd:sequence>
+    <!-- Optional hotel rating -->
+    <xsd:attribute name="Rating" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+
+  <!-- Address details including required NearestAirport -->
+  <xsd:complexType name="AddressType">
+    <xsd:sequence>
+      <xsd:element name="Number" type="xsd:string"/>
+      <xsd:element name="Street" type="xsd:string"/>
+      <xsd:element name="City" type="xsd:string"/>
+      <xsd:element name="State" type="xsd:string"/>
+      <xsd:element name="Zip" type="xsd:string"/>
+    </xsd:sequence>
+    <!-- Required attribute for the nearest airport -->
+    <xsd:attribute name="NearestAirport" type="xsd:string" use="required"/>
+  </xsd:complexType>
+
+</xsd:schema>
